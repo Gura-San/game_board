@@ -6,8 +6,7 @@
     "developer":    "Rockstar",
     "releaseDate":  "2014-11-18",
     "userScore":    10,
-    "price":        60,
-    "onBoard":      true
+    "price":        60
   },
   {
     "name":         "DOOM 3",
@@ -16,8 +15,7 @@
     "developer":    "Bethesda Softworks",
     "releaseDate":  "2016-05-13",
     "userScore":    9,
-    "price":        60,
-    "onBoard":      false
+    "price":        60
   },
   {
     "name":         "Witcher 3",
@@ -26,8 +24,7 @@
     "developer":    "CD Projekt RED",
     "releaseDate":  "2015-05-19",
     "userScore":    10,
-    "price":        60,
-    "onBoard":      true
+    "price":        60
   },
   {
     "name":         "Hitman",
@@ -36,7 +33,6 @@
     "developer":    "IO Interactive",
     "releaseDate":  "2016-03-11",
     "userScore":    8,
-    "price":        60,
-    "onBoard":      false
+    "price":        60
   }
 ]
