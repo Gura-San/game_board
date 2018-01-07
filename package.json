@@ -1,0 +1,22 @@
+{
+  "name": "game_board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Gura-San/game_board.git"
+  },
+  "author": "Sandro Guraspasvili",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "*",
+    "express-handlebars": "^3.0.0",
+    "method-override": "^2.3.10",
+    "mongoose": "^4.4.11"
+  }
+}
