@@ -4,6 +4,7 @@ const GameCardSchema = new mongoose.Schema({
   name:         String,
   image:        String,
   platform:     String,
+  developer:    String,
   releaseDate:  Date,
   userScore:    Number,
   price:        Number
