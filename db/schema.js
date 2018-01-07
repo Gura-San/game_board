@@ -7,7 +7,8 @@ const GameCardSchema = new mongoose.Schema({
   developer:    String,
   releaseDate:  Date,
   userScore:    Number,
-  price:        Number
+  price:        Number,
+  onBoard:      Boolean
 })
 
 const GameCard = mongoose.model('GameCard', GameCardSchema)
