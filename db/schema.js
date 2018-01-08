@@ -10,6 +10,14 @@ const GameCardSchema = new mongoose.Schema({
   price:        Number,
 })
 
-const GameCard = mongoose.model('GameCard', GameCardSchema)
+const UserSchema = new mongoose.Schema({
+  name:         String,
+  age:          Number,
+  gameBoard:    []
+})
 
-module.exports = GameCard
+
+const GameCard = mongoose.model('GameCard', GameCardSchema)
+const User = mongoose.model('User', UserSchema)
+
+module.exports = { GameCard, User }
