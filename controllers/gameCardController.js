@@ -16,10 +16,10 @@ Router.get("/:name", (req, res) => {
     .games(
       {
         filters: {
-          "release_dates.date-gt": "2015-12-31",
+          "release_dates.date-gt": "2000-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 20,
+        limit: 10,
         offset: 0,
         order: "release_dates.date:desc",
         search: req.params.name
@@ -29,7 +29,10 @@ Router.get("/:name", (req, res) => {
     .then(data => {
       // response.body contains the parsed JSON response to this query
       console.log(data.body);
-      res.render("game-card");
+      
+      res.render("search-results", {
+        cards: data.body
+      });
     })
     .catch(error => {
       throw error;

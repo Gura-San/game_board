@@ -13,7 +13,7 @@
   "author": "Sandro Guraspasvili",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.0",
+    "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "*",
     "express-handlebars": "^3.0.0",

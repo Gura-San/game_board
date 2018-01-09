@@ -1,6 +1,7 @@
 const express = require('express')
 const hbs     = require('express-handlebars')
 const cards   = require('./controllers/gameCardController')
+const parser  = require('body-parser')
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.engine('hbs', hbs({
   defaultLayout:  'layout-main'
 }))
 
+app.use(parser.urlencoded({ extended: true }))
 app.use('/assets', express.static('public'))
 app.use('/', cards)
 
