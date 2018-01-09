@@ -12,28 +12,41 @@ Router.get("/", (req, res) => {
 });
 
 Router.get("/:name", (req, res) => {
-  client;
   client
     .games(
       {
         filters: {
-          "release_dates.date-gt": "2010-12-31",
+          "release_dates.date-gt": "2015-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 5,
+        limit: 20,
         offset: 0,
         order: "release_dates.date:desc",
-        search: "Doom"
+        search: req.params.name
       },
       ["name", "release_dates.date", "rating", "hypes", "cover"]
     )
-    .then(res => {
+    .then(data => {
       // response.body contains the parsed JSON response to this query
-      console.log(res.body);
+      console.log(data.body);
+      res.render("game-card");
     })
     .catch(error => {
       throw error;
     });
 });
+
+Router.post('/', (req, res) => {
+
+})
+
+Router.put('/', (req, res) => {
+
+})
+
+Router.delete('/', (req, res) => {
+
+})
+
 
 module.exports = Router;
