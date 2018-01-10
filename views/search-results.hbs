@@ -1,10 +1,9 @@
 {{# each cards as |card index|}}
 
-<div class="col s12 m3">
+<div class="col l4 m3 s2">
   <div class="card">
     <div class="card-image">
       <img src=https://images.igdb.com/igdb/image/upload/t_cover_big/{{card.cover.cloudinary_id}}.jpg>
-      {{!-- <span class="card-title">{{card.name}}</span> --}}
       <form action="/add/{{card.id}}?_method=put" method="post">
         <button type="submit" class="btn-floating halfway-fab waves-effect waves-light red">
           <i class="material-icons">add</i>
@@ -12,7 +11,7 @@
       </form>
     </div>
     <div class="card-content">
-      <p>{{card.name}}</p>
+      <span class="card-title">{{card.name}}</span>
     </div>
   </div>
 </div>

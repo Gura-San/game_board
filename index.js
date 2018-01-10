@@ -4,6 +4,9 @@ const cards           = require('./controllers/gameCardController')
 const parser          = require('body-parser')
 const methodOverride  = require('method-override')
 
+const back            = require('express-back');
+const session         = require('express-session')
+
 const app = express()
 
 app.set('port', process.env.PORT || 4000)
@@ -14,6 +17,11 @@ app.engine('hbs', hbs({
   layoutsDir:     'views/',
   defaultLayout:  'layout-main'
 }))
+
+app.use(session({
+  secret: 'super secret'
+}));
+app.use(back());
 
 app.use(parser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))

@@ -11,6 +11,30 @@ Router.get("/", (req, res) => {
   res.render("game-card");
 });
 
+Router.get("/user/gameboard", (req, res) => {
+  GameBoard.find({}).then(allItems => {
+    let idArray = [];
+    allItems.forEach((item, index) => idArray.push(item.id));
+    // idArray contains all the .id values from allItems
+    client
+      .games(
+        {
+          ids: idArray
+        },
+        ["name", "release_dates.date", "rating", "hypes", "cover"]
+      )
+      .then(data => {
+        // response.body contains the parsed JSON response to this query
+        res.render("user-screen", {
+          cards: data.body
+        });
+      })
+      .catch(error => {
+        throw error;
+      });
+  });
+});
+
 Router.get("/:name", (req, res) => {
   client
     .games(
@@ -19,9 +43,8 @@ Router.get("/:name", (req, res) => {
           "release_dates.date-gt": "2000-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 5,
+        limit: 20,
         offset: 0,
-        cover: true,
         order: "release_dates.date:desc",
         search: req.params.name
       },
@@ -41,13 +64,19 @@ Router.get("/:name", (req, res) => {
 });
 
 Router.put("/add/:id", (req, res) => {
-
   // GameBoard.create({ id: req.params.id })
-  GameBoard.update({ id: req.params.id }, { id: req.params.id }, { upsert: true } )
-      .catch(error => {
-        throw error;
-      })
-})
+  GameBoard.update(
+    { id: req.params.id },
+    { id: req.params.id },
+    { upsert: true }
+  )
+    .then(req => {
+      return res.back();
+    })
+    .catch(error => {
+      throw error;
+    });
+});
 
 Router.put("/", (req, res) => {});
 
