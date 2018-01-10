@@ -1,21 +1,9 @@
-const GameCard = require ('./schema').GameCard
-const User = require ('./schema').User
+const GameBoard = require ('./schema')
 const SeedData = require('./seeds.json')
 
-GameCard.remove({})
+GameBoard.remove({})
   .then(() => {
-    return GameCard.collection.insert(SeedData)
-  })
-  .then((err) => {
-    console.log(err)
-  })
-  .then(() => {
-    process.exit()
-  })
-
-  User.remove({})
-  .then(() => {
-    return User.collection.insert(SeedData)
+    return GameBoard.collection.insert(SeedData)
   })
   .then((err) => {
     console.log(err)

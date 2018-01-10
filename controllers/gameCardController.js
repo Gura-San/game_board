@@ -1,5 +1,5 @@
 const Router = require("express").Router();
-const Card = require("../db/schema");
+const GameBoard = require("../db/schema");
 const igdb = require("igdb-api-node").default;
 
 //================== API Variables ==================
@@ -19,8 +19,9 @@ Router.get("/:name", (req, res) => {
           "release_dates.date-gt": "2000-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 10,
+        limit: 5,
         offset: 0,
+        cover: true,
         order: "release_dates.date:desc",
         search: req.params.name
       },
@@ -29,7 +30,7 @@ Router.get("/:name", (req, res) => {
     .then(data => {
       // response.body contains the parsed JSON response to this query
       console.log(data.body);
-      
+
       res.render("search-results", {
         cards: data.body
       });
@@ -39,17 +40,17 @@ Router.get("/:name", (req, res) => {
     });
 });
 
-Router.post('/', (req, res) => {
+Router.put("/add/:id", (req, res) => {
 
+  // GameBoard.create({ id: req.params.id })
+  GameBoard.update({ id: req.params.id }, { id: req.params.id }, { upsert: true } )
+      .catch(error => {
+        throw error;
+      })
 })
 
-Router.put('/', (req, res) => {
+Router.put("/", (req, res) => {});
 
-})
-
-Router.delete('/', (req, res) => {
-
-})
-
+Router.delete("/", (req, res) => {});
 
 module.exports = Router;
