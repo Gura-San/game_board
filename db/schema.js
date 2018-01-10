@@ -8,7 +8,8 @@ const mongoose = require('./connection')
 // })
 
 const GameBoardSchema = new mongoose.Schema({
-  id: Number
+  id:     Number,
+  review: String
 })
 
 
