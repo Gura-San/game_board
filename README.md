@@ -20,5 +20,5 @@ Runs in the browser
 ## Known issues
 CSS shakes 
 
-## Shoutout
+## Shout-out
 A big shoutout to Instructor team for helping with the logic during the development process and [IGDB](https://www.igdb.com) for providing access to the API
