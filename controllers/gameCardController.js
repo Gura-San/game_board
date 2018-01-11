@@ -8,15 +8,17 @@ require("dotenv").config();
 const client = igdb(process.env.MASHAPEKEY);
 //===================================================
 
+// main page route
+
 Router.get("/", (req, res) => {
-  res.render("game-card");
+  res.redirect("/user/gameboard");
 });
+
+// userboard route with board seed function
 
 Router.get("/user/gameboard", (req, res) => {
   GameBoard.find({}).then(allItems => {
     let idArray = []
-    let commArray = []
-    allItems.forEach((item, index) => commArray.push(item.review));
     allItems.forEach((item, index) => idArray.push(item.id));
     // idArray contains all the .id values from allItems
     client
@@ -36,8 +38,9 @@ Router.get("/user/gameboard", (req, res) => {
   });
 });
 
+// search route with search result seed function
+
 Router.post("/", (req, res) => {
-  console.log(req.body.gameName)
   client
     .games(
       {
@@ -63,6 +66,8 @@ Router.post("/", (req, res) => {
     });
 });
 
+// route to add cards to the userboard with duplicate check
+
 Router.put("/add/:id", (req, res) => {
   GameBoard.update(
     { id: req.params.id },
@@ -75,6 +80,8 @@ Router.put("/add/:id", (req, res) => {
     });
 });
 
+// card id update
+
 Router.put("/add/gameboard/changeid/:id", (req, res) => {
   GameBoard.findOneAndUpdate({ id: req.params.id }, req.body.GameBoard)
   .then(() => {
@@ -84,6 +91,8 @@ Router.put("/add/gameboard/changeid/:id", (req, res) => {
     throw error;
   });
 });
+
+// delete card route
 
 Router.delete("/add/:id", (req, res) => {
   let id = parseInt(req.params.id)
