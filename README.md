@@ -1,8 +1,8 @@
 ## Gameboard website
-This is express application website that primarily works on backend. It’s meant to help gamers to establish their game libraries with a connected [IGDB](https://www.igdb.com) game API.
+This is express application website that primarily works on backend. It’s meant to help gamers to establish their game libraries with connected [IGDB](https://www.igdb.com) game API.
 
 ## Motivation
-The project was done for the WDI20 second project assignment by Sandro Guraspasvili
+Project was done for the WDI20 second project assignment by Sandro Guraspasvili
 
 ## Build status
 Working, deployed
