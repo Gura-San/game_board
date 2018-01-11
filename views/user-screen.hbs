@@ -4,9 +4,9 @@
   <div class="card">
     <div class="card-image">
       <img src=https://images.igdb.com/igdb/image/upload/t_cover_big/{{card.cover.cloudinary_id}}.jpg>
-      <form action="/add/{{card.id}}?_method=put" method="post">
+      <form action="/add/{{card.id}}?_method=delete" method="post">
         <button type="submit" class="btn-floating halfway-fab waves-effect waves-light red">
-          <i class="material-icons">add</i>
+          <i class="material-icons">delete</i>
         </button>
       </form>
     </div>
@@ -15,23 +15,21 @@
     </div>
 
     <div class="card-reveal">
-      <form action="/add/gameboard/review/{{card.id}}" method="post">
-      <span class="card-title">Review:</span>
-      <div class="input-field">
-        <input id="review" type="text">
-        <label for="text"></label>
-      </div>
-      <div class="card-action">
-        <button type="submit" class="btn">
-          <i class="material-icon">add</i>
-        </button>
-        <button type="submit" class="orange btn">
-          <i class="material-icon">edit</i>
-        </a>
-        <div>
-          <p>{{card.review}}</p>
+      <form action="/add/gameboard/changeid/{{card.id}}?_method=put" method="post">
+        <span class="card-title">Change Tag:</span>
+        <div class="input-field">
+          <input type="number" name="GameBoard[id]" value="{{card.id}}" >
+          <label for="text"></label>
         </div>
-      </div>
+        <div class="card-action">
+          <button type="submit" class="orange btn">
+            <i class="material-icon">edit</i>
+          </button>
+          <div>
+            <p>{{card.review}}</p>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

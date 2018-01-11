@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="/assets/css/materialize.min.css" media="screen,projection" />
+  <link type="text/css" rel="stylesheet" href="/assets/css/style.css" media="screen,projection" />
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -21,17 +22,6 @@
     <div class="nav-wrapper">
       <a href="#" class="brand-logo">Logo</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li>
-          <form>
-            <div class="input-field">
-              <input id="search" type="search" required>
-              <label class="label-icon" for="search">
-                <i class="material-icons">search</i>
-              </label>
-              <i class="material-icons">close</i>
-            </div>
-          </form>
-        </li>
         <li>
           <a href="sass.html">Sass</a>
         </li>
@@ -47,7 +37,9 @@
 
   <div class="container">
     <div class="row">
-      {{{body}}}
+      {{!-- <div class="col s12 cards-container"> --}}
+        {{{body}}}
+      {{!-- </div> --}}
     </div>
   </div>
 
@@ -84,9 +76,13 @@
       </div>
     </div>
   </footer>
+  
   <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/assets/js/materialize.min.js"></script>
 </body>
 
 </html>
+
+
+
