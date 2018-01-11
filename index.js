@@ -20,6 +20,8 @@ app.use(methodOverride('_method'))
 app.use('/assets', express.static('public'))
 app.use('/', cards)
 
-app.listen(app.get('port'), () => {
-  console.log(`server running on port: ${app.get('port')}`)
-})
+app.set('port', process.env.PORT || 4000)
+
+  app.listen(app.get('port'), () => {
+    console.log(`✅ PORT: ${app.get('port')} 🌟`)
+  })
