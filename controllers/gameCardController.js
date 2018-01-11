@@ -36,7 +36,8 @@ Router.get("/user/gameboard", (req, res) => {
   });
 });
 
-Router.get("/:name", (req, res) => {
+Router.post("/", (req, res) => {
+  console.log(req.body.gameName)
   client
     .games(
       {
@@ -47,7 +48,7 @@ Router.get("/:name", (req, res) => {
         limit: 10,
         offset: 0,
         order: "release_dates.date:desc",
-        search: req.params.name
+        search: req.body.gameName
       },
       ["name", "cover"]
     )

@@ -1,7 +1,25 @@
-footer {
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  position: relative;
+}
+
+.button-collapse {
   position: fixed;
-  bottom: 0;
   left: 0;
-  width: 100%;
-  z-index: 1
+  top: calc(10vh + 64px);
+  bottom: 0;
+  height: 50vh;
+}
+
+.button-collapse .material-icons {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
 }
