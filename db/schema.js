@@ -1,16 +1,22 @@
 const mongoose = require('./connection')
 
-
-// const UserSchema = new mongoose.Schema({
-//   name:         String,
-//   age:          Number,
-//   board:    [GameBoard]
-// })
+const CoverSchema = new mongoose.Schema({
+  url: String,
+  cloudinary_id: String,
+  width: Number,
+  height: Number
+})
 
 const GameBoardSchema = new mongoose.Schema({
   id:     Number,
-  review: String
+  review: String,
+  storyline: String,
+  aggregated_rating: Number,
+  developers: [ Number ],
+  first_release_date: Number,
+  cover: [ CoverSchema ]
 })
+
 
 const FullBoardSchema = new mongoose.Schema({
   name: String,

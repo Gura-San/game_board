@@ -48,15 +48,15 @@ Router.post("/", (req, res) => {
           "release_dates.date-gt": "2000-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 10,
+        limit: 3,
         offset: 0,
         order: "release_dates.date:desc",
         search: req.body.gameName
       },
-      ["name", "cover"]
+      ["name", "cover", "storyline", "aggregated_rating", "developers", "first_release_date"]
     )
+    // response.body contains the parsed JSON response to this query
     .then(data => {
-      // response.body contains the parsed JSON response to this query
       res.render("search-results", {
         cards: data.body
       });
