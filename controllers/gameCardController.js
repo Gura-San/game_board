@@ -42,10 +42,10 @@ Router.post("/", (req, res) => {
     .games(
       {
         filters: {
-          "release_dates.date-gt": "2000-12-31",
+          "release_dates.date-gt": "1970-12-31",
           "release_dates.date-lt": "2017-01-01"
         },
-        limit: 10,
+        limit: 5,
         offset: 0,
         order: "release_dates.date:desc",
         search: req.body.gameName
@@ -56,7 +56,7 @@ Router.post("/", (req, res) => {
       // response.body contains the parsed JSON response to this query
       res.render("search-results", {
         cards: data.body
-      });
+      })
     })
     .catch(error => {
       throw error;
