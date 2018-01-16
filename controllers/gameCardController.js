@@ -1,7 +1,8 @@
-const Router = require("express").Router();
+const Router    = require("express").Router();
 const GameBoard = require("../db/schema").GameBoard;
-const FullBoard = require("../db/schema").FullBoard;
-const igdb = require("igdb-api-node").default;
+const ClipBoard = require("../db/schema").ClipBoard;
+const MemoBoard = require("../db/schema").MemoBoard;
+const igdb      = require("igdb-api-node").default;
 
 //================== API Variables ==================
 require("dotenv").config();
@@ -17,26 +18,43 @@ Router.get("/", (req, res) => {
 // userboard route with board seed function
 
 Router.get("/user/gameboard", (req, res) => {
-  GameBoard.find({}).then(allItems => {
-    let idArray = []
-    allItems.forEach((item, index) => idArray.push(item.id));
-    // idArray contains all the .id values from allItems
+  ClipBoard.find({}).then(allItems => {
+    var idArray = [];
+    allItems.forEach((item, index) => {
+      idArray.push(item.id)
+    })
+    // idArray contains all the .id values from allItems    
     client
-      .games(
-        {
-          ids: idArray
-        },
-        ["name", "release_dates.date", "rating", "hypes", "cover"]
-      )
-      .then(data => {
-        // response.body contains the parsed JSON response to this query
-        res.render("user-screen", { cards: data.body });
+    .games(
+      {
+        ids: idArray
+      },
+      [
+        "name",
+        "cover",
+        "storyline",
+        "aggregated_rating",
+        "developers",
+        "first_release_date"
+      ]
+    )
+    .then(data => {
+      data.body.forEach(game => {
+        GameBoard.create( game )
       })
-      .catch(error => {
-        throw error;
-      });
-  });
+    }).then(() => {
+      console.log(GameBoard.body)
+      res.render("user-screen", { cards: GameBoard.body });
+    })
+    .catch(error => {
+      throw error;
+    });
+  })
+    
+    ClipBoard.remove({})
 });
+
+
 
 // search route with search result seed function
 
@@ -53,10 +71,11 @@ Router.post("/", (req, res) => {
         order: "release_dates.date:desc",
         search: req.body.gameName
       },
-      ["name", "cover", "storyline", "aggregated_rating", "developers", "first_release_date"]
+      ["name", "cover.cloudinary_id"]
     )
     // response.body contains the parsed JSON response to this query
     .then(data => {
+      console.log(data.body);
       res.render("search-results", {
         cards: data.body
       });
@@ -69,40 +88,36 @@ Router.post("/", (req, res) => {
 // route to add cards to the userboard with duplicate check
 
 Router.put("/add/:id", (req, res) => {
-  GameBoard.update(
+  ClipBoard.update(
     { id: req.params.id },
-    { id: req.params.id,
-      review: "no review"},
+    { id: req.params.id },
     { upsert: true }
-  )
-    .catch(error => {
-      throw error;
-    });
+  ).catch(error => {
+    throw error;
+  });
 });
 
 // card id update
 
 Router.put("/add/gameboard/changeid/:id", (req, res) => {
   GameBoard.findOneAndUpdate({ id: req.params.id }, req.body.GameBoard)
-  .then(() => {
-    res.redirect('/user/gameboard')
-  })
-  .catch(error => {
-    throw error;
-  });
+    .then(() => {
+      res.redirect("/user/gameboard");
+    })
+    .catch(error => {
+      throw error;
+    });
 });
 
 // delete card route
 
 Router.delete("/add/:id", (req, res) => {
-  let id = parseInt(req.params.id)
+  let id = parseInt(req.params.id);
   GameBoard.findOneAndRemove({ id: id })
-  .then(() => (
-    res.redirect('/user/gameboard')
-  ))
-  .catch((error) => {
-    throw error
-  })
+    .then(() => res.redirect("/user/gameboard"))
+    .catch(error => {
+      throw error;
+    });
 });
 
 module.exports = Router;

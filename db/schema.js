@@ -1,32 +1,35 @@
 const mongoose = require('./connection')
 
 const CoverSchema = new mongoose.Schema({
-  url: String,
-  cloudinary_id: String,
-  width: Number,
-  height: Number
+  url:                  String,
+  cloudinary_id:        String,
+  width:                Number,
+  height:               Number
 })
 
 const GameBoardSchema = new mongoose.Schema({
-  id:     Number,
-  review: String,
-  storyline: String,
-  aggregated_rating: Number,
-  developers: [ Number ],
-  first_release_date: Number,
-  cover: [ CoverSchema ]
+  id:                   Number,
+  name:                 String,
+  review:               String,
+  storyline:            String,
+  aggregated_rating:    Number,
+  developers:         [ Number ],
+  first_release_date:   Number,
+  cover:              [ CoverSchema ],
+  userReview:           String
 })
 
-
-const FullBoardSchema = new mongoose.Schema({
-  name: String,
-  cover: { cloudinary_id: String },
-  review: String
+const ClipBoardSchema = new mongoose.Schema({
+  id:                   Number
 })
 
+const MemoBoardSchema = new mongoose.Schema({
+  id:                   Number
+})
 
 
 const GameBoard = mongoose.model('GameBoard', GameBoardSchema)
-const FullBoard = mongoose.model('FullBoard', FullBoardSchema)
+const ClipBoard = mongoose.model('ClipBoard', ClipBoardSchema)
+const MemoBoard = mongoose.model('MemoBoard', MemoBoardSchema)
 
-module.exports = {GameBoard, FullBoard}
+module.exports = { GameBoard, ClipBoard, MemoBoard }
