@@ -7,8 +7,6 @@ const URL = 'mongodb://localhost/gameboard'
 //   mongoose.connect(URI); 
 // }
 
-// after you're done uncomment ↑↑↑ and comment ↓↓↓
-
 mongoose.connect(URL, { useMongoClient: true })
 
 mongoose.Promise = Promise

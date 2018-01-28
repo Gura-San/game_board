@@ -18,16 +18,24 @@ Router.get("/", (req, res) => {
 // userboard route with board seed function
 
 Router.get("/user/gameboard", (req, res) => {
+  //I would 
   ClipBoard.find({}).then(allItems => {
+
+    // This code can be refactored with .map
     var idArray = [];
     allItems.forEach((item, index) => {
       idArray.push(item.id)
     })
+    // .map refactor
+    // let idArray = allItems.map(item => item.id)
+
+
     // idArray contains all the .id values from allItems    
     client
     .games(
       {
-        ids: idArray
+        ids: idArray // I think this is still fetching all a series of games even if    
+                     // this is empty
       },
       [
         "name",
@@ -40,17 +48,23 @@ Router.get("/user/gameboard", (req, res) => {
     )
     .then(data => {
       data.body.forEach(game => {
+        // I might move this and the query before to its own route
+        // that specializes in fetching all the games
         GameBoard.create( game )
       })
     }).then(() => {
-      console.log(GameBoard.body)
-      res.render("user-screen", { cards: GameBoard.body });
+      console.log(GameBoard.body) // This will be undefined
+      // You instead want to query using the model
+      GameBoard.find({}).then(gameBoards => {
+        console.log(gameBoards)
+        res.render("user-screen", { cards: gameBoards });
+      })
     })
     .catch(error => {
+      console.error('Error in connecting to igdb')
       throw error;
     });
   })
-    
     ClipBoard.remove({})
 });
 
@@ -59,6 +73,8 @@ Router.get("/user/gameboard", (req, res) => {
 // search route with search result seed function
 
 Router.post("/", (req, res) => {
+//The POST route really should be for the creation of a resource.
+
   client
     .games(
       {
@@ -75,7 +91,7 @@ Router.post("/", (req, res) => {
     )
     // response.body contains the parsed JSON response to this query
     .then(data => {
-      console.log(data.body);
+      // console.log(data.body);
       res.render("search-results", {
         cards: data.body
       });
@@ -88,6 +104,7 @@ Router.post("/", (req, res) => {
 // route to add cards to the userboard with duplicate check
 
 Router.put("/add/:id", (req, res) => {
+  // Separating your Create / Update logic will make your controller code more RESTful
   ClipBoard.update(
     { id: req.params.id },
     { id: req.params.id },
@@ -95,18 +112,16 @@ Router.put("/add/:id", (req, res) => {
   ).catch(error => {
     throw error;
   });
+  // this method is missing a response
 });
 
 // card id update
 
 Router.put("/add/gameboard/changeid/:id", (req, res) => {
+  console.log(req.params.id)
   GameBoard.findOneAndUpdate({ id: req.params.id }, req.body.GameBoard)
-    .then(() => {
-      res.redirect("/user/gameboard");
-    })
-    .catch(error => {
-      throw error;
-    });
+    .then(() => {res.redirect("/user/gameboard") })
+    .catch(error => {throw error });
 });
 
 // delete card route
@@ -114,10 +129,9 @@ Router.put("/add/gameboard/changeid/:id", (req, res) => {
 Router.delete("/add/:id", (req, res) => {
   let id = parseInt(req.params.id);
   GameBoard.findOneAndRemove({ id: id })
+  // GameBoard.findOneAndRemove({ id}) //ES6+ shorthand
     .then(() => res.redirect("/user/gameboard"))
-    .catch(error => {
-      throw error;
-    });
+    .catch(error => {throw error});
 });
 
 module.exports = Router;
