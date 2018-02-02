@@ -7,7 +7,7 @@ Sandro Guraspasvili
 
 Alonzo Moses
 
-Francis Addiso
+Francis Addison
 
 Marquet Reid
 
