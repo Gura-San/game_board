@@ -23,6 +23,27 @@ Working, [Heroku deploy](https://dbc-project3-backend.herokuapp.com/)
 ## Tech/framework used
 This is an Express Backe-End application that resolves requests from the Front-End React application
 
+The server was written in JavaScript using Express and Mongoose frameworks.
+
+
+## Packages used
+
+body-parser: 1.18.2,
+    
+brewerydb-node: 0.0.1,
+    
+cors: 2.8.4,
+    
+dotenv: 4.0.0,
+    
+express: latest,
+    
+method-override: 2.3.10,
+    
+mongoose: 4.4.11,
+    
+nodemon: 1.14.11
+
 
 ## Installation
 1. Fork/Clone the repo
