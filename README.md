@@ -21,7 +21,7 @@ Working, [Heroku deploy](https://dbc-project3-backend.herokuapp.com/)
 
 
 ## Tech/framework used
-This is an Express Backe-End application that resolves requests from the Front-End React application
+This is an Express Backe-End application that resolves requests from the [Dollar Beer Club](https://github.com/codenamequet/beer-club-front-end)
 
 The server was written in JavaScript using Express and Mongoose frameworks.
 
