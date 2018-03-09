@@ -8,7 +8,7 @@ Project was done for the WDI20 second project assignment by Sandro Guraspasvili
 Working, deployed
 
 ## Screenshot
-[Main page screen](https://imgur.com/a/kFt5m)
+![Main page screen](https://i.imgur.com/gI4P9U5.jpg)
 
 
 ## Tech/framework used
